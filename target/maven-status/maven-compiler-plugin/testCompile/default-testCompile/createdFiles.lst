@@ -1,0 +1,7 @@
+bank\tests\acceptance\PrintingAccountStatementOnConsoleTest.class
+bank\tests\unit\InMemoryTransactionsRepositoryTest.class
+bank\tests\unit\BankAccountTest.class
+bank\tests\DatesHelper.class
+bank\tests\integration\TransactionsRepositoryTest.class
+bank\tests\integration\FileTransactionsRepositoryTest.class
+bank\tests\TransactionBuilder.class
