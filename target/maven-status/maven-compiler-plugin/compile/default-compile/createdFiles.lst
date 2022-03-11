@@ -1,8 +1,0 @@
-bank\domain\Display.class
-bank\domain\BankAccount.class
-bank\domain\TransactionsRepository.class
-bank\domain\Transaction.class
-bank\domain\Calendar.class
-bank\infrastructure\InMemoryTransactionsRepository.class
-bank\infrastructure\FileTransactionsRepository.class
-bank\domain\StatementPrinter.class
