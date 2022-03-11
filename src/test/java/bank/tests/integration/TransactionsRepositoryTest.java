@@ -33,15 +33,15 @@ public abstract class TransactionsRepositoryTest {
 
     @Test
     public void a_transaction_can_be_saved() throws ParseException {
-        Transaction transaction = aTransaction().withDeposit(500).on("25/10/2021").build();
+        Transaction transaction = aTransaction().withDeposit(500).onBritishDate("25/10/2021").build();
 
         repository.save(transaction);
 
         List<Transaction> transactions = readAllTransactions();
         assertThat(transactions.size(), is(3));
-        assertThat(transactions.get(0), is(aTransaction().withDeposit(100).on("10/10/2021").build()));
-        assertThat(transactions.get(1), is(aTransaction().withWithdrawal(50).on("15/10/2021").build()));
-        assertThat(transactions.get(2), is(aTransaction().withDeposit(500).on("25/10/2021").build()));
+        assertThat(transactions.get(0), is(aTransaction().withDeposit(100).onBritishDate("10/10/2021").build()));
+        assertThat(transactions.get(1), is(aTransaction().withWithdrawal(50).onBritishDate("15/10/2021").build()));
+        assertThat(transactions.get(2), is(aTransaction().withDeposit(500).onBritishDate("25/10/2021").build()));
 
     }
 
@@ -50,8 +50,8 @@ public abstract class TransactionsRepositoryTest {
         List<Transaction> transactions = readAllTransactions();
 
         assertThat(transactions.size(), is(2));
-        assertThat(transactions.get(0), is(aTransaction().withDeposit(100).on("10/10/2021").build()));
-        assertThat(transactions.get(1), is(aTransaction().withWithdrawal(50).on("15/10/2021").build()));
+        assertThat(transactions.get(0), is(aTransaction().withDeposit(100).onBritishDate("10/10/2021").build()));
+        assertThat(transactions.get(1), is(aTransaction().withWithdrawal(50).onBritishDate("15/10/2021").build()));
     }
 
     protected Transaction parse(String transactionLine) throws ParseException {

@@ -10,24 +10,17 @@ public class LineStatementPrinter implements StatementPrinter {
 
 
 
-    public LineStatementPrinter(Display display, String dateFormat) {
+    public LineStatementPrinter(Display display, Formatter formatter) {
         this.display = display;
-        this.formatter = new Formatter(dateFormat);
+        this.formatter = formatter;
         datesByDescendingOrder = new DatesByDescendingOrder();
     }
 
     @Override
     public void print(List<Transaction> transactions) {
-        display.print("date || credit || debit || balance");
-        if (transactions.isEmpty()) {
-            return;
-        }
-        List<StatementLine> lines = getLines(transactions);
-        datesByDescendingOrder.sort(lines);
-        printLine(lines);
-    }
+        display.print(formatter.getHeader());
 
-    private void printLine(List<StatementLine> lines) {
+        List<StatementLine> lines = getStatementLines(transactions);
         for (StatementLine line : lines) {
             int amount = line.getAmount();
             if (amount == 0) {
@@ -37,6 +30,12 @@ public class LineStatementPrinter implements StatementPrinter {
 
             display.print(formattedLine);
         }
+    }
+
+    private List<StatementLine> getStatementLines(List<Transaction> transactions) {
+        List<StatementLine> lines = getLines(transactions);
+        datesByDescendingOrder.sort(lines);
+        return lines;
     }
 
     private List<StatementLine> getLines(List<Transaction> transactions) {

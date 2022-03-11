@@ -29,30 +29,30 @@ public class BankAccountTest {
 
     @Test
     public void deposit_money() throws ParseException {
-        when(calendar.getDate()).thenReturn(date("10/01/2012", Formatter.BRITISH_DATE_FORMAT));
+        when(calendar.getDate()).thenReturn(date("10/01/2012", EnglishFormatter.BRITISH_DATE_FORMAT));
 
         bankAccount.deposit(500);
 
-        Transaction transaction = aTransaction().withDeposit(500).on("10/01/2012").build();
+        Transaction transaction = aTransaction().withDeposit(500).onBritishDate("10/01/2012").build();
 
         verify(transactionsRepository).save(transaction);
     }
 
     @Test
     public void withdraw_money() throws ParseException {
-        when(calendar.getDate()).thenReturn(date("12/12/2020", Formatter.BRITISH_DATE_FORMAT));
+        when(calendar.getDate()).thenReturn(date("12/12/2020", EnglishFormatter.BRITISH_DATE_FORMAT));
 
         bankAccount.withdraw(1000);
 
-        Transaction transaction = aTransaction().withWithdrawal(1000).on("12/12/2020").build();
+        Transaction transaction = aTransaction().withWithdrawal(1000).onBritishDate("12/12/2020").build();
         verify(transactionsRepository).save(transaction);
     }
 
     @Test
     public void print_bank_statement() throws ParseException {
         List<Transaction> transactions = Arrays.asList(
-                aTransaction().withDeposit(150).on("01/01/2011").build(),
-                aTransaction().withWithdrawal(50).on("05/05/2015").build()
+                aTransaction().withDeposit(150).onBritishDate("01/01/2011").build(),
+                aTransaction().withWithdrawal(50).onBritishDate("05/05/2015").build()
         );
         when(transactionsRepository.retrieveAll()).thenReturn(transactions);
 
