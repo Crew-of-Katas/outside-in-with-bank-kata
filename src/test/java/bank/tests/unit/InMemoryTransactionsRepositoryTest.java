@@ -5,7 +5,6 @@ import bank.domain.TransactionsRepository;
 import bank.infrastructure.InMemoryTransactionsRepository;
 import bank.tests.integration.TransactionsRepositoryTest;
 
-import java.text.ParseException;
 import java.util.List;
 
 public class InMemoryTransactionsRepositoryTest extends TransactionsRepositoryTest {
@@ -19,15 +18,10 @@ public class InMemoryTransactionsRepositoryTest extends TransactionsRepositoryTe
     }
 
     @Override
-    protected void deleteAllTransactions() {
-        repository = createRepository();
-    }
-
-    @Override
-    protected void addTransactions() throws ParseException {
-        for (String transactionLine: initialTransactionLines) {
-            Transaction transaction = parse(transactionLine);
+    protected void prepareData(List<Transaction> transactions) {
+        for (Transaction transaction: transactions) {
             repository.save(transaction);
         }
     }
+
 }
