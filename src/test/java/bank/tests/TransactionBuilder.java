@@ -1,6 +1,6 @@
 package bank.tests;
 
-import bank.domain.EnglishFormatter;
+import bank.domain.Formatter;
 import bank.domain.Transaction;
 
 import java.text.ParseException;
@@ -18,19 +18,19 @@ public class TransactionBuilder {
 
     public TransactionBuilder onBritishDate(String date) {
         this.date = date;
-        dateFormat = EnglishFormatter.BRITISH_DATE_FORMAT;
+        dateFormat = Formatter.DD_MM_YYYY;
         return this;
     }
 
     public TransactionBuilder onAmericanDate(String date) {
         this.date = date;
-        dateFormat = EnglishFormatter.AMERICAN_DATE_FORMAT;
+        dateFormat = Formatter.MM_DD_YYYY;
         return this;
     }
 
     public TransactionBuilder onSpanishDate(String date) {
         this.date = date;
-        dateFormat = EnglishFormatter.BRITISH_DATE_FORMAT;
+        dateFormat = Formatter.DD_MM_YYYY;
         return this;
     }
 

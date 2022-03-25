@@ -29,7 +29,7 @@ public class BankAccountTest {
 
     @Test
     public void deposit_money() throws ParseException {
-        when(calendar.getDate()).thenReturn(date("10/01/2012", EnglishFormatter.BRITISH_DATE_FORMAT));
+        when(calendar.getDate()).thenReturn(date("10/01/2012", Formatter.DD_MM_YYYY));
 
         bankAccount.deposit(500);
 
@@ -40,7 +40,7 @@ public class BankAccountTest {
 
     @Test
     public void withdraw_money() throws ParseException {
-        when(calendar.getDate()).thenReturn(date("12/12/2020", EnglishFormatter.BRITISH_DATE_FORMAT));
+        when(calendar.getDate()).thenReturn(date("12/12/2020", Formatter.DD_MM_YYYY));
 
         bankAccount.withdraw(1000);
 

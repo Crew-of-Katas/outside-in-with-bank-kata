@@ -21,7 +21,7 @@ public class StatementPrinterTest {
     @Before
     public void setUp() {
         display = mock(Display.class);
-        statementPrinter = new LineStatementPrinter(display, EnglishFormatter.forBritish());
+        statementPrinter = new LineStatementPrinter(display, Formatter.forBritish());
     }
 
     @Test

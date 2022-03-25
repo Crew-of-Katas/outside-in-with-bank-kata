@@ -17,9 +17,9 @@ public class PrintingAccountStatementOnConsoleTest {
         Calendar calendar = mock(Calendar.class);
         Display display = mock(Display.class);
         TransactionsRepository transactionsRepository = mock(TransactionsRepository.class);
-        when(calendar.getDate()).thenReturn(date("10/01/2012", EnglishFormatter.BRITISH_DATE_FORMAT));
-        when(calendar.getDate()).thenReturn(date("13/01/2012", EnglishFormatter.BRITISH_DATE_FORMAT));
-        when(calendar.getDate()).thenReturn(date("14/01/2012", EnglishFormatter.BRITISH_DATE_FORMAT));
+        when(calendar.getDate()).thenReturn(date("10/01/2012", Formatter.DD_MM_YYYY));
+        when(calendar.getDate()).thenReturn(date("13/01/2012", Formatter.DD_MM_YYYY));
+        when(calendar.getDate()).thenReturn(date("14/01/2012", Formatter.DD_MM_YYYY));
 
         when(transactionsRepository.retrieveAll()).thenReturn(
                 Arrays.asList(
@@ -31,7 +31,7 @@ public class PrintingAccountStatementOnConsoleTest {
         BankAccount bankAccount = new BankAccount(
                 calendar,
                 transactionsRepository,
-                new LineStatementPrinter(display, EnglishFormatter.forBritish()));
+                new LineStatementPrinter(display, Formatter.forBritish()));
 
         bankAccount.deposit(1000);
         bankAccount.deposit(2000);
@@ -52,7 +52,7 @@ public class PrintingAccountStatementOnConsoleTest {
         Display display = mock(Display.class);
         TransactionsRepository transactionsRepository = mock(TransactionsRepository.class);
         String anyDate = "10/24/2012";
-        when(calendar.getDate()).thenReturn(date(anyDate, EnglishFormatter.AMERICAN_DATE_FORMAT));
+        when(calendar.getDate()).thenReturn(date(anyDate, Formatter.MM_DD_YYYY));
 
         when(transactionsRepository.retrieveAll()).thenReturn(
                 Arrays.asList(
@@ -62,7 +62,7 @@ public class PrintingAccountStatementOnConsoleTest {
         BankAccount bankAccount = new BankAccount(
                 calendar,
                 transactionsRepository,
-                new LineStatementPrinter(display, EnglishFormatter.forAmerican()));
+                new LineStatementPrinter(display, Formatter.forAmerican()));
 
         bankAccount.deposit(1000);
         bankAccount.printBankStatement();
@@ -89,7 +89,7 @@ public class PrintingAccountStatementOnConsoleTest {
         BankAccount bankAccount = new BankAccount(
                 calendar,
                 transactionsRepository,
-                new LineStatementPrinter(display, new SpanishFormatter()));
+                new LineStatementPrinter(display, Formatter.forSpanish()));
 
         bankAccount.deposit(1000);
         bankAccount.printBankStatement();
