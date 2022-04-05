@@ -12,6 +12,7 @@ import java.nio.file.StandardOpenOption;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -32,18 +33,18 @@ public class FileTransactionsRepositoryTest extends TransactionsRepositoryTest {
     }
 
     @Override
-    protected List<Transaction> readAllTransactions() throws ReadTransactionsException {
+    protected List<Transaction> readAllTransactions() {
         return readTransactions(TRANSACTIONS_FILE);
     }
 
     @Override
-    protected void prepareData(List<Transaction> transactions) throws ErrorPreparingDataException {
-        try {
+    protected void prepareData(List<Transaction> transactions) {
+       try {
             deleteAllTransactions();
             List<String> transactionLines = createTransactionLinesFrom(transactions);
             addTransactionLines(transactionLines);
         } catch (IOException e) {
-            throw new ErrorPreparingDataException(e);
+            System.err.println("Error preparing transaction data in tests: " + e);
         }
     }
 
@@ -68,13 +69,14 @@ public class FileTransactionsRepositoryTest extends TransactionsRepositoryTest {
         }
     }
 
-    private List<Transaction> readTransactions(String filePath) throws ReadTransactionsException {
+    private List<Transaction> readTransactions(String filePath) {
         try {
             List<String> lines = extractTransactionLinesFrom(filePath);
             return createTransactionsFrom(lines);
         } catch (IOException | ParseException e) {
-            throw new ReadTransactionsException(e);
+            System.err.println("Error reading transaction data in test: " + e);
         }
+        return Collections.emptyList();
     }
 
     private List<String> extractTransactionLinesFrom(String filePath) throws IOException {

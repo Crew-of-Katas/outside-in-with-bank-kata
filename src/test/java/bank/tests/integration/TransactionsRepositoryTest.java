@@ -20,7 +20,7 @@ public abstract class TransactionsRepositoryTest {
     private List<Transaction> initialTransactions;
 
     @Before
-    public void setup() throws ParseException, ErrorPreparingDataException {
+    public void setup() throws ParseException {
         repository = createRepository();
         initialTransactions = Arrays.asList(aTransaction().withDeposit(100).onBritishDate("10/10/2021").build(),
                 aTransaction().withWithdrawal(50).onBritishDate("15/10/2021").build());
@@ -28,7 +28,7 @@ public abstract class TransactionsRepositoryTest {
     }
 
     @Test
-    public void a_transaction_can_be_saved() throws ParseException, ReadTransactionsException {
+    public void a_transaction_can_be_saved() throws ParseException {
         Transaction transaction = aTransaction().withDeposit(500).onBritishDate("25/10/2021").build();
 
         repository.save(transaction);
@@ -43,24 +43,9 @@ public abstract class TransactionsRepositoryTest {
 
     protected abstract TransactionsRepository createRepository();
 
-    protected abstract List<Transaction> readAllTransactions() throws ReadTransactionsException;
+    protected abstract List<Transaction> readAllTransactions();
 
-    protected abstract void prepareData(List<Transaction> transactions) throws ErrorPreparingDataException;
-
-    protected class ErrorPreparingDataException extends Exception {
-
-        public ErrorPreparingDataException(Exception exception) {
-            super(exception);
-        }
-    }
-
-    protected class ReadTransactionsException extends Exception {
-
-        public ReadTransactionsException(Exception exception) {
-            super(exception);
-        }
-    }
-
+    protected abstract void prepareData(List<Transaction> transactions);
 
     private List<Transaction> append(List<Transaction> transactions, Transaction transaction) {
         List<Transaction> result = new ArrayList<>(transactions);
