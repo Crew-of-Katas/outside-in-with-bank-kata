@@ -37,8 +37,8 @@ public abstract class TransactionsRepositoryTest {
     }
 
     @Test
-    public void transactions_can_be_retrieved() throws ReadTransactionsException {
-        assertThat(readAllTransactions(), is(initialTransactions));
+    public void transactions_can_be_retrieved() {
+        assertThat(repository.retrieveAll(), is(initialTransactions));
     }
 
     protected abstract TransactionsRepository createRepository();
@@ -60,6 +60,7 @@ public abstract class TransactionsRepositoryTest {
             super(exception);
         }
     }
+
 
     private List<Transaction> append(List<Transaction> transactions, Transaction transaction) {
         List<Transaction> result = new ArrayList<>(transactions);
